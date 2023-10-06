@@ -7,23 +7,17 @@
 using namespace std;
 mutex myMutex1;
 mutex myMutex2;
+static bool s_Finished = false;
 //atomic<int> i(0);  //原子操作，不用加锁
 int i = 0;
-class temp {
-public:
-	int *a;
-	temp(int a_) {
-		a = new int(a_);
-	}	
-	temp(const temp& t) {
-		a = new int(*t.a);
+
+void print() {
+	while (!s_Finished) {
+		cout << "print" << endl;
+		Sleep(1000);
 	}
-	~temp(){
-		delete a;
-		cout << "delete " << endl;
-	}
-};
-void test( ) {
+}
+void test() {
 	//myMutex.lock();
 	//lock_guard<mutex> lk(myMutex);  Q: 在外面加锁比在里面加锁时间少
 	for (int k = 0; k < 1000000; k++) {
@@ -48,7 +42,7 @@ void test1() {
 	//myMutex.unlock();  //如果unlock 发生异常处理，抛出异常，则无法解锁， 另外线程也无法继续，引入lock_guard
 }
 int main() {
-	
+
 	clock_t start = clock();
 	int cnt = 100;
 	thread MyThread1(test);
@@ -60,7 +54,13 @@ int main() {
 	cout << i << endl;
 	clock_t end = clock();
 	cout << "用时：" << (double)(end - start) << endl;
-	
-	
+
+	thread Pthread(print);
+	cin.get();
+	s_Finished = true;
+	Pthread.join();
+	cout << "finished" << endl;
+
+
 	return 0;
 }
