@@ -1,7 +1,7 @@
 #include<iostream>
 #include<mutex>
 #include<memory>
-/*
+#include<thread>
 #include <boost/thread.hpp>    
 #include <boost/thread/mutex.hpp>  
 class dns_entry {};
@@ -21,15 +21,12 @@ public:
 		entries[domain] = dns_entries;
 	}
 };
-*/
+
 
 void test(std::shared_ptr<int>& p) {
 	std::cout << p.use_count();
 }
 int main() {
 	
-	
-	char c[5] = { '1','\0','3' };
-	printf("%s", c);
 	//std::cout << p2.use_count();
 }
