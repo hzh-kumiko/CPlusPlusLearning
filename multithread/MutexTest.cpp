@@ -12,9 +12,11 @@ static bool s_Finished = false;
 int i = 0;
 
 void print() {
+	cout << "print_thred_id = " << this_thread::get_id() << endl;
 	while (!s_Finished) {
 		cout << "print" << endl;
-		Sleep(1000);
+		this_thread::sleep_for(1s);
+
 	}
 }
 void test() {
@@ -60,7 +62,7 @@ int main() {
 	s_Finished = true;
 	Pthread.join();
 	cout << "finished" << endl;
-
+	cout << "main_thred_id = " << this_thread::get_id() << endl;
 
 	return 0;
 }
