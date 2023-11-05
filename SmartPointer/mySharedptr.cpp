@@ -6,7 +6,7 @@ private:
 	T* _ptr; //指向数据
 	int* _pcount; //指向计数
 public:
-	myShared_ptr(T* ptr = nullptr) :_ptr(ptr), _pcount(new int(1)) {
+	explicit myShared_ptr(T* ptr = nullptr) :_ptr(ptr), _pcount(new int(1)) {
 		std::cout << "constructor" << std::endl;
 	}
 
@@ -91,6 +91,7 @@ private:
 	int a;
 };
 int main() {
+	myShared_ptr<int> p_new = new int(2);
 	//标准shared_ptr
 	std::shared_ptr<int> p1 = std::shared_ptr<int>(new int);
 	std::cout << *p1 << std::endl;
