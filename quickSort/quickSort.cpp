@@ -2,7 +2,7 @@
 #include<vector>
 
 using namespace std;
-//二路快排
+//浜岃矾
 int pivot(vector<int>& nums, int start, int end) {
 	int n = nums[end];
 	int index = start;
@@ -30,7 +30,7 @@ void quickSort(vector<int>& nums, int start, int end) {
 	}
 }
 
-//三路快排
+//涓夎矾
 pair<int, int> pivot1(vector<int>& nums, int start, int end) {
 	int num = nums[start];
 	int i = start, j = start;
